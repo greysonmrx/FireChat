@@ -1,6 +1,7 @@
 import React from 'react';
 import { 
   View,
+  KeyboardAvoidingView,
   TextInput,
   TouchableOpacity,
   Image
@@ -30,6 +31,11 @@ export default function Login() {
     <View
       style={Container}
     >
+      <KeyboardAvoidingView
+        behavior="position"
+        enabled
+        keyboardVerticalOffset={100}
+      >
       <Image 
         style={ImageStyle}
         source={LoginImage}
@@ -73,6 +79,7 @@ export default function Login() {
           </Text>
         </TouchableOpacity>
       </View>
+      </KeyboardAvoidingView>
     </View>
   );
 }
