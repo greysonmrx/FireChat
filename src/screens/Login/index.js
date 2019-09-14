@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { 
   View,
   KeyboardAvoidingView,
@@ -27,6 +27,8 @@ import { Ionicons } from '@expo/vector-icons';
 import LoginImage from '../../../assets/images/step1Image.png';
 
 export default function Login() {
+  const [passVisibily, setPassVisibility] = useState(false);
+
   return (
     <View
       style={Container}
@@ -56,12 +58,13 @@ export default function Login() {
           <TextInput 
             style={InputPasswordStyle}
             placeholder="Sua senha secreta"
-            secureTextEntry={true}
+            secureTextEntry={!passVisibily}
           />
           <Ionicons 
-            name="ios-eye"
+            name={passVisibily ? "md-eye-off" : "md-eye"}
             size={23}
             color="#404040"
+            onPress={() => setPassVisibility(!passVisibily)}
           />
         </View>
       </View>
