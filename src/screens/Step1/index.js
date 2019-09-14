@@ -28,6 +28,12 @@ import { Entypo } from '@expo/vector-icons';
 import Step1Image from '../../../assets/images/step1Image.png';
 
 export default function Step1({ navigation }) {
+  const phoneNumberRef = React.createRef();
+
+  function focusNextField() {
+    phoneNumberRef.current.focus();
+  }
+
   return (
     <View
       style={Container}
@@ -64,10 +70,14 @@ export default function Step1({ navigation }) {
           <TextInput 
             style={CodeCountryStyle}
             keyboardType="numeric"
-          />
+            returnKeyType="next"
+            onSubmitEditing={() => focusNextField()}
+          />  
           <TextInput 
             style={PhoneNumberStyle}
             keyboardType="numeric"
+            returnKeyType="done"
+            ref={phoneNumberRef}
           />
         </View>  
         <View
