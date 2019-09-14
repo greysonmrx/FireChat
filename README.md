@@ -1,6 +1,7 @@
 # FireChat
 
-./assets/logo_extended_white.png
+
+![FireChat](assets/logo_extended_white.png)
 
 ## Funcionalidades
 
