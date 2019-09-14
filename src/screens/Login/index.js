@@ -28,6 +28,11 @@ import LoginImage from '../../../assets/images/step1Image.png';
 
 export default function Login() {
   const [passVisibily, setPassVisibility] = useState(false);
+  const passwordInput = React.createRef();
+
+  function focusNextField() {
+    passwordInput.current.focus();
+  }
 
   return (
     <View
@@ -51,6 +56,11 @@ export default function Login() {
         <TextInput 
           style={InputEmailStyle}
           placeholder="Seu email"
+          autoCapitalize="none"
+          keyboardType="email-address"
+          returnKeyType="next"
+          onSubmitEditing={() => focusNextField()}
+          blurOnSubmit={false}
         />
         <View
           style={ViewInputPasswordStyle}
@@ -59,6 +69,8 @@ export default function Login() {
             style={InputPasswordStyle}
             placeholder="Sua senha secreta"
             secureTextEntry={!passVisibily}
+            returnKeyType="done"
+            ref={passwordInput}
           />
           <Ionicons 
             name={passVisibily ? "md-eye-off" : "md-eye"}

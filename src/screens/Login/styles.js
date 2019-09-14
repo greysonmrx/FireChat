@@ -41,7 +41,8 @@ export const ViewInputPasswordStyle = {
 }
 
 export const InputPasswordStyle = {
-    flex: 1
+    flex: 1,
+    marginRight: 20
 }
 
 export const ButtonContainer = {
