@@ -1,8 +1,9 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 
 // Importando estilos dos componentes
-import { Container } from './styles';
+import { Container, Title } from './styles';
+import Text from '../Text';
 
 export default function HeaderTitle({ unauthenticated, step }) {
     if (unauthenticated) {
@@ -11,7 +12,7 @@ export default function HeaderTitle({ unauthenticated, step }) {
                 <View
                     style={Container}
                 >
-                    <Text>Login</Text>
+                    <Text style={Title}>Login</Text>
                 </View>
             );
         } else {
@@ -19,7 +20,7 @@ export default function HeaderTitle({ unauthenticated, step }) {
                 <View
                     style={Container}
                 >
-                    <Text>Passo {step}/3</Text>
+                    <Text style={Title}>Passo {step}/3</Text>
                 </View>
             );
         }        

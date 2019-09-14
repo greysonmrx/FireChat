@@ -3,3 +3,7 @@ export const Container = {
     alignItems: 'center',
     justifyContent: 'center',
 } 
+
+export const Title = {
+    fontSize: 18
+}
