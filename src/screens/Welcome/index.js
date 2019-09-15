@@ -62,7 +62,7 @@ function Welcome({ navigation }) {
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={ButtonRegister}
-                    onPress={() => navigation.navigate("Step1")}
+                    onPress={() => navigation.navigate("Step3")}
                 >
                     <Text 
                         style={TextButtonRegister}
