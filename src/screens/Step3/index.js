@@ -5,7 +5,8 @@ import {
   TextInput,
   TouchableOpacity,
   Platform,
-  ScrollView
+  ScrollView,
+  KeyboardAvoidingView
 } from 'react-native';
 
 import * as ImagePicker from 'expo-image-picker';
@@ -41,6 +42,23 @@ export default function Step3({ navigation }) {
   const [image, setImage] = useState(null);
   const [passVisibility, setPassVisibility] = useState(true);
 
+  const nameInput = React.createRef();
+  const emailInput = React.createRef();
+  const passwordInput = React.createRef();
+  const areaInput = React.createRef();
+
+  function focusNextField(key) {
+    if (key === 1) {
+      nameInput.current.focus();
+    } else if (key === 2) {
+      emailInput.current.focus();
+    } else if (key === 3) {
+      passwordInput.current.focus();
+    } else {
+      areaInput.current.focus();
+    }
+  }
+
   async function getPermissionAsync() {
     if (Platform.OS === "ios") {
       const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
@@ -56,7 +74,7 @@ export default function Step3({ navigation }) {
       allowsEditing: true,
       aspect: [3, 3],
     });
-    
+
     if (!result.cancelled) {
       setImage(result.uri);
     }
@@ -70,6 +88,12 @@ export default function Step3({ navigation }) {
     <ScrollView
       style={Container}
     >
+      <KeyboardAvoidingView
+        behavior="position"
+        enabled
+        keyboardVerticalOffset={-500}
+        style={{ flex: 1 }}
+      >
         <Image 
           source={Step3Image}
           style={ImageStyle}
@@ -90,7 +114,8 @@ export default function Step3({ navigation }) {
           style={InputContainer}
         >
           <TouchableOpacity
-            onPress={() => _pickImage()}                
+            onPress={() => _pickImage()} 
+            style={{ elevation: 3 }}               
           >
             { image 
               ? <Image 
@@ -113,6 +138,8 @@ export default function Step3({ navigation }) {
             placeholder="Seu nome e sobrenome"
             autoCapitalize="words"
             returnKeyType="next"
+            ref={nameInput}
+            onSubmitEditing={() => focusNextField(2)}
           />
           <TextInput 
             style={EmailStyle}
@@ -120,6 +147,8 @@ export default function Step3({ navigation }) {
             autoCapitalize="none"
             keyboardType="email-address"
             returnKeyType="next"
+            ref={emailInput}
+            onSubmitEditing={() => focusNextField(3)}
           />
           <View
             style={ViewInputPasswordStyle}
@@ -129,6 +158,8 @@ export default function Step3({ navigation }) {
               placeholder="Uma senha secreta"
               secureTextEntry={passVisibility}
               returnKeyType="next"
+              ref={passwordInput}
+              onSubmitEditing={() => focusNextField(4)}
             />
             <Ionicons 
               name={passVisibility ? "md-eye-off" : "md-eye"}
@@ -148,6 +179,7 @@ export default function Step3({ navigation }) {
               returnKeyType="done"
               multiline={true}
               maxLength={80}
+              ref={areaInput}
             />
           </View>  
         </View>  
@@ -165,6 +197,7 @@ export default function Step3({ navigation }) {
             </Text>
           </TouchableOpacity>  
         </View>
+      </KeyboardAvoidingView>
     </ScrollView>
   );
 }

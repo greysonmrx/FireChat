@@ -11,8 +11,7 @@ export const ImageStyle = {
 export const AvatarStyle = {
     height: 120,
     width: 120,
-    borderRadius: 100,
-    elevation: 3
+    borderRadius: 100
 }
 
 export const ViewAvatarStyle = {
