@@ -5,14 +5,14 @@ import { View } from 'react-native';
 import { Container, Title } from './styles';
 import Text from '../Text';
 
-export default function HeaderTitle({ unauthenticated, step }) {
+export default function HeaderTitle({ unauthenticated, login }) {
     if (unauthenticated) {
-        if (!step) {
+        if (login) {
             return (
                 <View
                     style={Container}
                 >
-                    <Text style={Title}>Login</Text>
+                    <Text style={Title}>Entrar</Text>
                 </View>
             );
         } else {
@@ -20,7 +20,7 @@ export default function HeaderTitle({ unauthenticated, step }) {
                 <View
                     style={Container}
                 >
-                    <Text style={Title}>Passo {step}/3</Text>
+                    <Text style={Title}>Registrar</Text>
                 </View>
             );
         }        
