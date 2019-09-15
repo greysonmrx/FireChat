@@ -11,9 +11,7 @@ import RightIcon from './components/RightIcon';
 // Telas caso o usuário não esteja logado
 import Welcome from './screens/Welcome';
 import Login from './screens/Login';
-import Step1 from './screens/Step1';
-import Step2 from './screens/Step2';
-import Step3 from './screens/Step3';
+import Register from './screens/Register';
 
 // Configuração padrão para o "header" de cada tela
 const defaultOptions = {
@@ -51,46 +49,8 @@ const unauthenticated = createStackNavigator({
               )
         })
     },
-    Step1: {
-        screen: Step1,
-        navigationOptions: ({ navigation }) => ({
-            headerTitle: (
-                <HeaderTitle  
-                    unauthenticated={ true }
-                    step={1}
-                />
-              ),
-              headerLeft: (
-                  <Back
-                    navigation={ navigation }
-                  />
-              ),
-              headerRight: (
-                <RightIcon />
-              )
-        })
-    },
-    Step2: {
-        screen: Step2,
-        navigationOptions: ({ navigation }) => ({
-            headerTitle: (
-                <HeaderTitle 
-                    unauthenticated={ true }
-                    step={2}
-                />
-              ),
-              headerLeft: (
-                  <Back
-                    navigation={ navigation }
-                  />
-              ),
-              headerRight: (
-                <RightIcon />
-              )
-        })
-    },
-    Step3: {
-        screen: Step3,
+    Register: {
+        screen: Register,
         navigationOptions: ({ navigation }) => ({
             headerTitle: (
                 <HeaderTitle
