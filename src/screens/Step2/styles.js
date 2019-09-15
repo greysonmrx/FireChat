@@ -34,7 +34,7 @@ export const TextButton = {
 export const ButtonContainer = {
     width: '100%',
     paddingHorizontal: 20,
-    marginTop: 30
+    marginVertical: 30
 }
 
 export const Button = {

@@ -2,6 +2,7 @@ import React from 'react';
 import { 
   View, 
   Image,
+  ScrollView,
   TextInput,
   TouchableOpacity,
   KeyboardAvoidingView
@@ -35,7 +36,7 @@ export default function Step1({ navigation }) {
   }
 
   return (
-    <View
+    <ScrollView
       style={Container}
     >
       <KeyboardAvoidingView
@@ -85,6 +86,7 @@ export default function Step1({ navigation }) {
         >
           <TouchableOpacity
             style={Button}
+            onPress={() => navigation.navigate("Step2")}
           >
             <Text
               regular={true}
@@ -95,6 +97,6 @@ export default function Step1({ navigation }) {
           </TouchableOpacity>  
         </View>
       </KeyboardAvoidingView>
-    </View>
+    </ScrollView>
   );
 }

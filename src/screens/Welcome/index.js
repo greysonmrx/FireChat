@@ -51,6 +51,7 @@ function Welcome({ navigation }) {
             >
                 <TouchableOpacity
                     style={ButtonLogin}
+                    onPress={() => navigation.navigate("Login")}
                 >
                     <Text 
                         style={TextButtonLogin}
@@ -61,6 +62,7 @@ function Welcome({ navigation }) {
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={ButtonRegister}
+                    onPress={() => navigation.navigate("Step1")}
                 >
                     <Text 
                         style={TextButtonRegister}

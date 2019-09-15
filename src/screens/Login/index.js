@@ -4,7 +4,8 @@ import {
   KeyboardAvoidingView,
   TextInput,
   TouchableOpacity,
-  Image
+  Image,
+  ScrollView
 } from 'react-native';
 
 import { 
@@ -26,7 +27,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 import LoginImage from '../../../assets/images/step1Image.png';
 
-export default function Login() {
+export default function Login({ navigation }) {
   const [passVisibily, setPassVisibility] = useState(false);
   const passwordInput = React.createRef();
 
@@ -35,7 +36,7 @@ export default function Login() {
   }
 
   return (
-    <View
+    <ScrollView
       style={Container}
     >
       <KeyboardAvoidingView
@@ -95,6 +96,6 @@ export default function Login() {
         </TouchableOpacity>
       </View>
       </KeyboardAvoidingView>
-    </View>
+    </ScrollView>
   );
 }

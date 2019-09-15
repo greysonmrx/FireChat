@@ -1,6 +1,7 @@
 import React from 'react';
 import { 
   View, 
+  ScrollView,
   Image,
   TouchableOpacity,
   KeyboardAvoidingView
@@ -26,7 +27,7 @@ import CodeInput from 'react-native-confirmation-code-input';
 
 export default function Step2({ navigation }) {
   return (
-    <View
+    <ScrollView
       style={Container}
     >
       <KeyboardAvoidingView
@@ -64,6 +65,7 @@ export default function Step2({ navigation }) {
             size={50}
             containerStyle={{ marginTop: 30 }}
             codeInputStyle={{ borderWidth: 1.5 }}
+            onFulfill={() => null}
           />
         </View>  
         <View
@@ -71,6 +73,7 @@ export default function Step2({ navigation }) {
         >
           <TouchableOpacity
             style={Button}
+            onPress={() => navigation.navigate("Step3")}
           >
             <Text
               regular={true}
@@ -81,6 +84,6 @@ export default function Step2({ navigation }) {
           </TouchableOpacity>  
         </View>
         </KeyboardAvoidingView>
-    </View>
+    </ScrollView>
   );
 }
