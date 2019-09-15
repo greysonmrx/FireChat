@@ -36,7 +36,7 @@ import Text from '../../components/Text';
 
 import { Entypo, Ionicons } from '@expo/vector-icons';
 
-import Step3Image from '../../../assets/images/step2Image.png';
+import RegisterImage from '../../../assets/images/registerImage.png';
 
 export default function Register({ navigation }) {
   const [image, setImage] = useState(null);
@@ -95,7 +95,7 @@ export default function Register({ navigation }) {
         style={{ flex: 1 }}
       >
         <Image 
-          source={Step3Image}
+          source={RegisterImage}
           style={ImageStyle}
           resizeMode="contain"
         />

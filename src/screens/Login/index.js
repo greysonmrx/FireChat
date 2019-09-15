@@ -25,7 +25,7 @@ import Text from '../../components/Text';
 
 import { Ionicons } from '@expo/vector-icons';
 
-import LoginImage from '../../../assets/images/step1Image.png';
+import LoginImage from '../../../assets/images/loginImage.png';
 
 export default function Login({ navigation }) {
   const [passVisibily, setPassVisibility] = useState(false);
