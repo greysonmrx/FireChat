@@ -37,6 +37,7 @@ const unauthenticated = createStackNavigator({
             headerTitle: (
                 <HeaderTitle 
                     unauthenticated={ true }
+                    login={ true }
                 />
               ),
               headerLeft: (

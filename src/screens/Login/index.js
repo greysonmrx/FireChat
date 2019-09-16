@@ -22,17 +22,29 @@ import {
 } from './styles';
 
 import Text from '../../components/Text';
-
 import { Ionicons } from '@expo/vector-icons';
-
 import LoginImage from '../../../assets/images/loginImage.png';
+import * as firebase from 'firebase';
 
 export default function Login({ navigation }) {
+  const [email, setEmail] = useState(undefined);
+  const [password, setPassword] = useState(undefined);
   const [passVisibily, setPassVisibility] = useState(false);
   const passwordInput = React.createRef();
 
   function focusNextField() {
     passwordInput.current.focus();
+  }
+
+  async function signIn() {
+    try {
+      const user = await firebase.auth()
+        .signInWithEmailAndPassword(email, password);
+      
+      console.log(user);
+    } catch(err) {
+      console.log(err);
+    }
   }
 
   return (
@@ -62,6 +74,7 @@ export default function Login({ navigation }) {
           returnKeyType="next"
           onSubmitEditing={() => focusNextField()}
           blurOnSubmit={false}
+          onChangeText={(text) => setEmail(text)}
         />
         <View
           style={ViewInputPasswordStyle}
@@ -72,6 +85,7 @@ export default function Login({ navigation }) {
             secureTextEntry={!passVisibily}
             returnKeyType="done"
             ref={passwordInput}
+            onChangeText={(text) => setPassword(text)}
           />
           <Ionicons 
             name={passVisibily ? "md-eye-off" : "md-eye"}
@@ -86,6 +100,7 @@ export default function Login({ navigation }) {
       >
         <TouchableOpacity
           style={Button}
+          onPress={() => signIn()}
         >
           <Text
             style={TextButton} 
