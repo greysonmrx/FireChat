@@ -1,4 +1,12 @@
 import React, { useState, useEffect } from 'react';
+
+import * as ImagePicker from 'expo-image-picker';
+import * as Permissions from 'expo-permissions';
+import Text from '../../components/Text';
+import { Entypo, Ionicons } from '@expo/vector-icons';
+import RegisterImage from '../../../assets/images/registerImage.png';
+import * as firebase from 'firebase';
+
 import { 
   View, 
   Image,
@@ -8,9 +16,6 @@ import {
   ScrollView,
   KeyboardAvoidingView
 } from 'react-native';
-
-import * as ImagePicker from 'expo-image-picker';
-import * as Permissions from 'expo-permissions';
 
 import { 
   Container,
@@ -32,14 +37,12 @@ import {
   ViewAvatarStyle
 } from './styles';
 
-import Text from '../../components/Text';
-
-import { Entypo, Ionicons } from '@expo/vector-icons';
-
-import RegisterImage from '../../../assets/images/registerImage.png';
-
 export default function Register({ navigation }) {
   const [image, setImage] = useState(null);
+  const [name, setName] = useState(undefined);
+  const [email, setEmail] = useState(undefined);
+  const [password, setPassword] = useState(undefined);
+  const [bio, setBio] = useState(undefined);
   const [passVisibility, setPassVisibility] = useState(true);
 
   const nameInput = React.createRef();
@@ -56,6 +59,35 @@ export default function Register({ navigation }) {
       passwordInput.current.focus();
     } else {
       areaInput.current.focus();
+    }
+  }
+
+  async function createUser(uri) {
+    try {
+      const response = await fetch(uri);
+      const blob = await response.blob();
+
+      const { user: { uid } } = await firebase.auth().createUserWithEmailAndPassword(email, password);
+      const uploadTask = await firebase.storage().ref().child(`profile_pictures/${uid}`).put(blob);
+
+      uploadTask.ref.getDownloadURL().then((downloadUrl) => {
+        firebase.database().ref('users/' + uid).set({
+          username: name,
+          email_address: email,
+          profile_picture : downloadUrl,
+          biography: bio
+        });
+      });
+    } catch(err) {
+      console.log(err);
+    }
+  }
+
+  async function signUp() {
+    try {
+      createUser(image);
+    } catch(err) {
+      console.log(err);
     }
   }
 
@@ -139,6 +171,7 @@ export default function Register({ navigation }) {
             autoCapitalize="words"
             returnKeyType="next"
             ref={nameInput}
+            onChangeText={(text) => setName(text)}
             onSubmitEditing={() => focusNextField(2)}
           />
           <TextInput 
@@ -148,6 +181,7 @@ export default function Register({ navigation }) {
             keyboardType="email-address"
             returnKeyType="next"
             ref={emailInput}
+            onChangeText={(text) => setEmail(text)}
             onSubmitEditing={() => focusNextField(3)}
           />
           <View
@@ -159,6 +193,7 @@ export default function Register({ navigation }) {
               secureTextEntry={passVisibility}
               returnKeyType="next"
               ref={passwordInput}
+              onChangeText={(text) => setPassword(text)}
               onSubmitEditing={() => focusNextField(4)}
             />
             <Ionicons 
@@ -178,8 +213,10 @@ export default function Register({ navigation }) {
               keyboardType="default"
               returnKeyType="done"
               multiline={true}
+              onChangeText={(text) => setBio(text)}
               maxLength={80}
               ref={areaInput}
+              onSubmitEditing={() => signUp()}
             />
           </View>  
         </View>  
@@ -188,12 +225,13 @@ export default function Register({ navigation }) {
         >
           <TouchableOpacity
             style={Button}
+            onPress={() => signUp()}
           >
             <Text
               regular={true}
               style={TextButton}
             >
-              Continuar
+              Registrar
             </Text>
           </TouchableOpacity>  
         </View>
