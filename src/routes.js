@@ -79,8 +79,27 @@ const unauthenticated = createStackNavigator({
 
 // Navegação do usuário autenticado
 const authenticated = createStackNavigator({
+    Home: {
+        screen: Home,
+        navigationOptions: ({ navigation }) => ({
+            headerTitle: (
+                <HeaderTitle />
+              ),
+              headerLeft: (
+                  <InfoIcon 
+                    navigation={ navigation }
+                  />
+              ),
+              headerRight: (
+                <Add 
+                    navigation={ navigation }
+                />
+              )
+        })
+    }
 }, {
     defaultOptions,
+    initialRouteName: 'Home',
 });
 
 // Criando a navegação para o app principal
