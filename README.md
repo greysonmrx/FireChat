@@ -5,11 +5,11 @@
 
 ## Funcionalidades
 
-* **Login**
-* **Register**
-* **Mostrar quem está online**
+* **Login** ✔️
+* **Register** ✔️
+* **Mostrar quando está online** ✔️
 * **Criar grupos**
-* **Criar conversas**
+* **Criar conversas** ✔️
 * **Notificação de quando há mensagens novas**
 * **Silenciar conversas ou grupos**
 * **Mudar formato da hora**
@@ -26,21 +26,21 @@
 
 ### Usuário não autenticado
 
-#### Principal
+#### Principal ✔️
     Vai ser nesta tela onde será mostrado a opção de login ou do usuário se registrar na base de dados.
 
-#### Login
+#### Login ✔️
     Vai ser nesta tela onde o usuário poderá se logar na aplicação.
 
-#### Register
+#### Register ✔️
     Vai ser nesta tela onde o usuário poderá se registrar na aplicação.
 
 ### Usuário autenticado
 
-#### Conversas
+#### Conversas ✔️
     Vai ser nesta tela onde o usuário poderá ver, pesquisar e criar (conversas ou grupos).
 
-#### Chat
+#### Chat ✔️
     Vai ser nesta tela onde o usuário poderá enviar mensagens.
 
 #### Configurações
