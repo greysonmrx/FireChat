@@ -9,6 +9,7 @@ import Back from './components/Back';
 import RightIcon from './components/RightIcon';
 import InfoIcon from './components/InfoIcon';
 import Add from './components/Add';
+import RightIconChat from './components/RightIconChat';
 
 // Telas caso o usuário não esteja logado
 import Welcome from './screens/Welcome';
@@ -17,6 +18,7 @@ import Register from './screens/Register';
 
 // Telas caso o usuário esteja logado
 import Home from './screens/Home';
+import Chat from './screens/Chat';
 
 
 // Configuração padrão para o "header" de cada tela
@@ -94,6 +96,24 @@ const authenticated = createStackNavigator({
                 <Add 
                     navigation={ navigation }
                 />
+              )
+        })
+    },
+    Chat: {
+        screen: Chat,
+        navigationOptions: ({ navigation }) => ({
+            headerTitle: (
+                <HeaderTitle
+                    navigation={ navigation } 
+                />
+              ),
+              headerLeft: (
+                  <Back
+                    navigation={ navigation }
+                  />
+              ),
+              headerRight: (
+                <RightIconChat />
               )
         })
     }
