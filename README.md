@@ -6,7 +6,7 @@
 ## Funcionalidades
 
 * **Login**
-* **Register - Com verificação de número**
+* **Register**
 * **Mostrar quem está online**
 * **Criar grupos**
 * **Criar conversas**
