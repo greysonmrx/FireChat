@@ -19,7 +19,7 @@ import Register from './screens/Register';
 // Telas caso o usuário esteja logado
 import Home from './screens/Home';
 import Chat from './screens/Chat';
-
+import AddChat from './screens/AddChat';
 
 // Configuração padrão para o "header" de cada tela
 const defaultOptions = {
@@ -114,6 +114,24 @@ const authenticated = createStackNavigator({
               ),
               headerRight: (
                 <RightIconChat />
+              )
+        })
+    },
+    AddChat: {
+        screen: AddChat,
+        navigationOptions: ({ navigation }) => ({
+            headerTitle: (
+                <HeaderTitle
+                    text="Criar nova conversa"
+                />
+              ),
+              headerLeft: (
+                  <Back
+                    navigation={ navigation }
+                  />
+              ),
+              headerRight: (
+                <RightIcon />
               )
         })
     }
