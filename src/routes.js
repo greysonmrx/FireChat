@@ -1,17 +1,23 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { createAppContainer } from 'react-navigation';
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
 // Componentes
 import HeaderTitle from './components/HeaderTitle';
 import Back from './components/Back';
 import RightIcon from './components/RightIcon';
+import InfoIcon from './components/InfoIcon';
+import Add from './components/Add';
 
 // Telas caso o usuário não esteja logado
 import Welcome from './screens/Welcome';
 import Login from './screens/Login';
 import Register from './screens/Register';
+
+// Telas caso o usuário esteja logado
+import Home from './screens/Home';
+
 
 // Configuração padrão para o "header" de cada tela
 const defaultOptions = {
@@ -22,8 +28,7 @@ const defaultOptions = {
             borderBottomWidth: StyleSheet.hairlineWidth 
         },
         headerTintColor: "#FFFFFF",
-    },
-    initialRouteName: 'Welcome'
+    }
 }
 
 // Navegação do usuário não autenticado
@@ -36,8 +41,7 @@ const unauthenticated = createStackNavigator({
         navigationOptions: ({ navigation }) => ({
             headerTitle: (
                 <HeaderTitle 
-                    unauthenticated={ true }
-                    login={ true }
+                    text="Entrar"
                 />
               ),
               headerLeft: (
@@ -55,8 +59,7 @@ const unauthenticated = createStackNavigator({
         navigationOptions: ({ navigation }) => ({
             headerTitle: (
                 <HeaderTitle
-                    unauthenticated={ true } 
-                    step={3}
+                    text="Registrar"
                 />
               ),
               headerLeft: (
@@ -69,7 +72,23 @@ const unauthenticated = createStackNavigator({
               )
         })
     }
-}, defaultOptions);
+}, {
+    defaultOptions,
+    initialRouteName: 'Welcome',
+});
+
+// Navegação do usuário autenticado
+const authenticated = createStackNavigator({
+}, {
+    defaultOptions,
+});
 
 // Criando a navegação para o app principal
-export default createAppContainer(unauthenticated)
+export default createAppContainer(
+    createSwitchNavigator({
+        unauthenticated,
+        authenticated
+    }, {
+        initialRouteName: 'unauthenticated',
+    })
+)
