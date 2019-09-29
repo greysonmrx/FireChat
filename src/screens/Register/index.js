@@ -37,6 +37,8 @@ import {
   ViewAvatarStyle
 } from './styles';
 
+import User from '../../User';
+
 export default function Register({ navigation }) {
   const [image, setImage] = useState(null);
   const [name, setName] = useState(undefined);
@@ -68,15 +70,23 @@ export default function Register({ navigation }) {
       const blob = await response.blob();
 
       const { user: { uid } } = await firebase.auth().createUserWithEmailAndPassword(email, password);
-      const uploadTask = await firebase.storage().ref().child(`profile_pictures/${uid}`).put(blob);
+      var userId = uid;
+      const uploadTask = await firebase.storage().ref().child(`profile_pictures/${userId}`).put(blob);
 
-      uploadTask.ref.getDownloadURL().then((downloadUrl) => {
-        firebase.database().ref('users/' + uid).set({
+      uploadTask.ref.getDownloadURL().then(async (downloadUrl) => {
+        firebase.database().ref('users/' + userId).set({
           username: name,
           email_address: email,
           profile_picture : downloadUrl,
           biography: bio
         });
+      const user = await firebase.auth()
+        .signInWithEmailAndPassword(email, password);
+
+        const { user: { uid } } = user;
+        // AsyncStorage.setItem("@User", String(uid));
+        User.uid = uid;
+        navigation.navigate('Home');
       });
     } catch(err) {
       console.log(err);
