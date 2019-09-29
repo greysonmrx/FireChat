@@ -25,6 +25,7 @@ import Text from '../../components/Text';
 import { Ionicons } from '@expo/vector-icons';
 import LoginImage from '../../../assets/images/loginImage.png';
 import * as firebase from 'firebase';
+import User from '../../User';
 
 export default function Login({ navigation }) {
   const [email, setEmail] = useState(undefined);
@@ -40,8 +41,11 @@ export default function Login({ navigation }) {
     try {
       const user = await firebase.auth()
         .signInWithEmailAndPassword(email, password);
-      
-      console.log(user);
+
+      const { user: { uid } } = user;
+      // AsyncStorage.setItem("@User", String(uid));
+      User.uid = uid;
+      navigation.navigate('Home');
     } catch(err) {
       console.log(err);
     }
