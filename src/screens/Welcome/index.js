@@ -1,6 +1,7 @@
 import React from 'react';
 import {  
-    View, 
+    ScrollView, 
+    View,
     Image, 
     TouchableOpacity 
 } from 'react-native';
@@ -23,56 +24,58 @@ import WelcomeImage from '../../../assets/images/welcomeImage.png';
 
 function Welcome({ navigation }) {
     return (
-        <View
-            style={Container}
-        >
-            <Image 
-                style={ImageStyle}
-                source={WelcomeImage}
-                resizeMode='contain'
-            />
+        <ScrollView>
             <View
-                style={TextContainer}
+                style={Container}
             >
-                <Text 
-                    style={TitleStyle}
-                >
-                    Bem vindo ao Fire<Text style={{ color: '#00B0FF'}}>Chat</Text>!
-                </Text>
-                <Text 
-                    style={TextStyle}
-                    regular={true}
-                >
-                    Uma ferramenta de comunicação em tempo real em conversas privadas ou em grupos.
-                </Text>
-            </View>
-            <View
-                style={ButtonContainer}
-            >
-                <TouchableOpacity
-                    style={ButtonLogin}
-                    onPress={() => navigation.navigate("Login")}
+                <Image 
+                    style={ImageStyle}
+                    source={WelcomeImage}
+                    resizeMode='contain'
+                />
+                <View
+                    style={TextContainer}
                 >
                     <Text 
-                        style={TextButtonLogin}
-                        regular={true}
+                        style={TitleStyle}
                     >
-                        Entrar agora
+                        Bem vindo ao Fire<Text style={{ color: '#00B0FF'}}>Chat</Text>!
                     </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={ButtonRegister}
-                    onPress={() => navigation.navigate("Register")}
-                >
                     <Text 
-                        style={TextButtonRegister}
+                        style={TextStyle}
                         regular={true}
                     >
-                        Criar conta
+                        Uma ferramenta de comunicação em tempo real em conversas privadas ou em grupos.
                     </Text>
-                </TouchableOpacity>
+                </View>
+                <View
+                    style={ButtonContainer}
+                >
+                    <TouchableOpacity
+                        style={ButtonLogin}
+                        onPress={() => navigation.navigate("Login")}
+                    >
+                        <Text 
+                            style={TextButtonLogin}
+                            regular={true}
+                        >
+                            Entrar agora
+                        </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={ButtonRegister}
+                        onPress={() => navigation.navigate("Register")}
+                    >
+                        <Text 
+                            style={TextButtonRegister}
+                            regular={true}
+                        >
+                            Criar conta
+                        </Text>
+                    </TouchableOpacity>
+                </View>
             </View>
-        </View>
+        </ScrollView>
     );
 }
 

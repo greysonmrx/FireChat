@@ -1,5 +1,6 @@
 export const Container = { 
-    flex: 1
+    flex: 1,
+    paddingVertical: 20
 }
 
 export const ImageStyle = {
