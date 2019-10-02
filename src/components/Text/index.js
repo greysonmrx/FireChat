@@ -3,7 +3,7 @@ import { Text as RNText } from 'react-native';
 
 import * as Font from 'expo-font';
 
-export default function Text({ italic, regular, children, style }) {
+export default function Text({ italic, regular, children, style, numberLines }) {
     const [loadingFonts, setLoadingFonts] = useState(true);
 
     async function loadFont() {
@@ -41,6 +41,7 @@ export default function Text({ italic, regular, children, style }) {
         return (
             <RNText
                 style={[{ fontFamily: setFontType() }, style]}
+                numberOfLines={numberLines ? numberLines : 100}
             >
                 { children }
             </RNText>
