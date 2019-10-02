@@ -11,16 +11,18 @@ import {
 import Text from '../../components/Text';
 
 import * as firebase from 'firebase';
-
+import Loading from '../../components/Loading';
 import User from '../../User';
 import ItemSeparator from '../../components/ItemSeparator';
 
 export default function Home({ navigation }) {
+    const [loading, setLoading] = useState(false);
     const [users, setUsers] = useState([]);
     const [loggedAs, setLoggedAs] = useState(undefined);
 
     async function getUsers() {
         if (loggedAs) {
+            setLoading(true);
             let dbRef = firebase.database().ref('users');
             var array = [];
             dbRef.on('child_added', (val) => {
@@ -29,10 +31,10 @@ export default function Home({ navigation }) {
                         ...val.val(),
                         uid: val.key
                     }
-
-                    setUsers(users.concat(newUser));
+                    setUsers(oldState => [...oldState, newUser]);
+                    setLoading(false);
                 }
-            });
+            });            
         }
     }
 
@@ -59,7 +61,10 @@ export default function Home({ navigation }) {
                     >
                         <Text style={{ fontSize: 18, color: "#333333" }} regular>{item.username}</Text>
                     </View>
-                </View>                              
+                </View>     
+                {
+                    !!loading && <Loading />
+                }                         
             </TouchableOpacity>
         );
     }
